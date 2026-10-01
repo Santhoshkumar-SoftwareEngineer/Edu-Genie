@@ -146,7 +146,8 @@ export default function SettingsPage() {
                 onChange={(e) => setModelChoice(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
               >
-                <option value="gemini-2.0-flash">Gemini 2.0 Flash (Fastest & Best Reasoning)</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Recommended - Fastest & Deep Reasoning)</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash (Fast & Capable)</option>
                 <option value="gemini-1.5-flash">Gemini 1.5 Flash (Standard High-Speed)</option>
                 <option value="gemini-1.5-pro">Gemini 1.5 Pro (Deep Multimodal)</option>
               </select>
