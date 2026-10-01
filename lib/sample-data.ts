@@ -1,0 +1,195 @@
+import { Conversation, SavedItem, StudyActivity, UploadedDocument } from "@/types";
+
+export const SAMPLE_CONVERSATIONS: Conversation[] = [
+  {
+    id: "sample_convo_1",
+    title: "Explain Photosynthesis & Calvin Cycle",
+    topic: "Biology & Biochemistry",
+    explanationLevel: "intermediate",
+    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    messages: [
+      {
+        id: "msg_1",
+        role: "user",
+        content: "Explain photosynthesis and how the Calvin cycle works.",
+        timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
+        explanationLevel: "intermediate",
+      },
+      {
+        id: "msg_2",
+        role: "assistant",
+        content: `### 💡 Core Intuition
+**Photosynthesis** is the solar-powered biochemical process where photoautotrophs (plants, algae, cyanobacteria) convert light energy, carbon dioxide ($CO_2$), and water ($H_2O$) into glucose ($C_6H_{12}O_6$) and oxygen ($O_2$).
+
+---
+
+### 📖 Detailed Explanation
+
+#### 1. The Light Reactions (Thylakoid Membrane)
+- **Photon Absorption:** Chlorophyll pigments absorb photons, transferring excited electrons to Photosystems II and I.
+- **Photolysis:** Water is split ($2H_2O \\rightarrow 4H^+ + 4e^- + O_2$), releasing oxygen gas into the atmosphere.
+- **Chemiosmosis:** Protons pumped into the thylakoid lumen flow back via **ATP Synthase**, producing **ATP** and **NADPH**.
+
+#### 2. The Calvin Cycle / Light-Independent Reactions (Stroma)
+- **Step 1: Carbon Fixation:** The enzyme **RuBisCO** catalyzes the combination of $CO_2$ with ribulose 1,5-bisphosphate (RuBP) into 3-PGA.
+- **Step 2: Reduction:** ATP and NADPH convert 3-PGA into glyceraldehyde-3-phosphate (**G3P**), the true sugar precursor.
+- **Step 3: Regeneration:** 5 out of 6 G3P molecules are re-assembled using ATP into RuBP to continue the cycle.
+
+---
+
+### 🌟 Real-World Example
+Think of chloroplasts as **solar bakeries**:
+- **Sunlight & Water** = Power supply and clean water lines.
+- **Atmospheric $CO_2$** = Flour shipped in from outside.
+- **G3P / Glucose** = Freshly baked bread packaged for energy storage.
+- **$O_2$** = Steam and fresh air vented outside.
+
+---
+
+### 🔑 Key Exam Takeaways
+- **Location:** Light reactions in Thylakoids; Calvin cycle in Stroma.
+- **Rate-Limiting Enzyme:** RuBisCO is known as the slowest and most abundant enzyme on Earth.
+- **Energy Budget:** Fixation of one single $CO_2$ molecule requires 3 ATP and 2 NADPH.
+
+---
+
+### Suggested Next Questions
+- How do C4 and CAM plants prevent photorespiration in hot deserts?
+- What happens if the proton gradient across the thylakoid membrane is disrupted?
+- How does artificial photosynthesis attempt to generate green hydrogen fuel?`,
+        timestamp: new Date(Date.now() - 3600000 * 2 + 3000).toISOString(),
+        explanationLevel: "intermediate",
+        followUps: [
+          "How do C4 and CAM plants prevent photorespiration in hot deserts?",
+          "What happens if the proton gradient across the thylakoid membrane is disrupted?",
+          "How does artificial photosynthesis attempt to generate green hydrogen fuel?",
+        ],
+      },
+    ],
+  },
+  {
+    id: "sample_convo_2",
+    title: "Understanding Virtual Memory & Paging",
+    topic: "Computer Science & Operating Systems",
+    explanationLevel: "advanced",
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000).toISOString(),
+    messages: [
+      {
+        id: "msg_3",
+        role: "user",
+        content: "What is virtual memory and how does the TLB speed up paging?",
+        timestamp: new Date(Date.now() - 86400000).toISOString(),
+        explanationLevel: "advanced",
+      },
+      {
+        id: "msg_4",
+        role: "assistant",
+        content: `### 💡 Core Intuition
+**Virtual Memory** decouples a process's logical address space from physical RAM, providing hardware-enforced process isolation and allowing execution of programs larger than physical memory via demand paging.
+
+---
+
+### 📖 Technical Architecture & Mechanisms
+
+1. **Page Translation & Page Tables:**
+   - Logical address format: $\\text{Virtual Address} = (\\text{VPN}, \\text{Offset})$
+   - The **MMU** (Memory Management Unit) uses multi-level page tables to map the Virtual Page Number (VPN) to a Physical Frame Number (PFN).
+
+2. **Translation Lookaside Buffer (TLB):**
+   - The TLB is an ultra-fast hardware associative cache for page table entries.
+   - **TLB Hit:** Direct hardware translation in $< 1\\text{ ns}$.
+   - **TLB Miss:** MMU traverses page tables in DRAM (multi-level walk incurring $20-100\\text{ ns}$ penalty), loading the translation into the TLB.
+
+3. **Effective Memory Access Time (EMAT):**
+   $$\\text{EMAT} = (\\text{Hit Rate} \\times \\text{TLB Access}) + ((1 - \\text{Hit Rate}) \\times (\\text{TLB Access} + \\text{Page Walk} + \\text{RAM Access}))$$
+
+---
+
+### 🔑 Key Exam Takeaways
+- **Page Fault:** Software exception generated by MMU when valid bit is $0$; OS loads page from disk swap.
+- **Thrashing:** Excessive page faulting that overwhelms disk I/O when working set exceeds available RAM.`,
+        timestamp: new Date(Date.now() - 86400000 + 4000).toISOString(),
+        explanationLevel: "advanced",
+        followUps: [
+          "How does the clock replacement algorithm approximate LRU?",
+          "What is the role of inverted page tables in 64-bit architectures?",
+        ],
+      },
+    ],
+  },
+];
+
+export const SAMPLE_SAVED_ITEMS: SavedItem[] = [
+  {
+    id: "saved_1",
+    type: "note",
+    title: "Operating Systems — Process Synchronization",
+    content: {
+      topic: "Operating Systems",
+      overview: "Race conditions, Critical Section Problem, Mutex Locks, Semaphores, and Monitors.",
+      examPoints: [
+        "Three requirements for Critical Section solution: Mutual Exclusion, Progress, Bounded Waiting.",
+        "Strict alternation fails progress condition if one process executes non-critical section.",
+      ],
+    },
+    tags: ["Computer Science", "High Yield", "Midterm"],
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+  {
+    id: "saved_2",
+    type: "flashcard",
+    title: "Data Structures & Big-O Complexities",
+    content: {
+      topic: "Data Structures",
+      count: 12,
+    },
+    tags: ["Algorithms", "Interviews"],
+    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+  },
+];
+
+export const SAMPLE_DOCUMENTS: UploadedDocument[] = [
+  {
+    id: "doc_sample_1",
+    name: "Neural_Networks_Foundations.pdf",
+    size: 2450000,
+    type: "application/pdf",
+    uploadedAt: new Date(Date.now() - 86400000).toISOString(),
+    content: `Foundations of Deep Learning and Neural Networks. Chapter 1: Perceptrons and Activation Functions. A perceptron computes a weighted sum of inputs plus bias: z = W^T * x + b. Non-linear activation functions (ReLU, Sigmoid, GELU) allow neural networks to act as universal function approximators. Backpropagation utilizes the multivariable calculus chain rule to compute partial derivatives of loss with respect to weights dL/dW. Optimization algorithms like SGD, Adam, and RMSprop update parameters to minimize the empirical risk.`,
+    summary: "Comprehensive lecture notes covering perceptrons, backpropagation derivations, activation functions (ReLU, GELU), and gradient descent optimizers.",
+    keyTopics: ["Backpropagation", "Activation Functions", "Gradient Descent", "Loss Functions"],
+  },
+];
+
+export const SAMPLE_ACTIVITIES: StudyActivity[] = [
+  {
+    id: "act_1",
+    type: "quiz_taken",
+    title: "Completed Operating Systems Quiz",
+    details: "Scored 90% (9/10 correct) on Medium difficulty",
+    timestamp: new Date(Date.now() - 3600000 * 3).toISOString(),
+  },
+  {
+    id: "act_2",
+    type: "tutor_ask",
+    title: "Explored Photosynthesis & Calvin Cycle",
+    details: "Intermediate explanation with 3 follow-up deep dives",
+    timestamp: new Date(Date.now() - 3600000 * 6).toISOString(),
+  },
+  {
+    id: "act_3",
+    type: "flashcards_reviewed",
+    title: "Reviewed Data Structures Deck",
+    details: "Mastered 8 flashcards in 12 minutes",
+    timestamp: new Date(Date.now() - 86400000).toISOString(),
+  },
+  {
+    id: "act_4",
+    type: "notes_generated",
+    title: "Generated Master Study Notes",
+    details: "Topic: Thermodynamics & Entropy equations",
+    timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+];
